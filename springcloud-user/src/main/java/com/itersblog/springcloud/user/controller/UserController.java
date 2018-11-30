@@ -21,17 +21,16 @@ public class UserController {
 	private Environment env;
 	
 	@GetMapping("{id}")
-	public Map<String,Object> getUser(@PathVariable Long id) {
+	public Map<String,Object> getUser(@PathVariable Long id) throws InterruptedException {
 		long start=System.currentTimeMillis();
 		logger.info("request={id="+id+"}");
-//		try {
+//		if(env.getProperty("server.port").equals("8201")) {
 //			Thread.sleep(1500);
-//		} catch (InterruptedException e) {
-//			logger.error(e.getMessage(),e);
 //		}
 		Map<String,Object> user=new LinkedHashMap<String,Object>();
 		user.put("id", id);
 		user.put("name", env.getProperty("name","default"));
+		user.put("address", env.getProperty("spring.cloud.client.ipAddress")+":"+env.getProperty("server.port"));
 		Map<String,Object> result=new LinkedHashMap<String,Object>();
 		result.put("code", 0);
 		result.put("message", "OK");
