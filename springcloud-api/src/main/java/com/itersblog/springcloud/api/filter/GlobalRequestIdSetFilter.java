@@ -6,7 +6,10 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.support.FilterConstants;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -15,6 +18,8 @@ import com.netflix.zuul.context.RequestContext;
 public class GlobalRequestIdSetFilter extends ZuulFilter {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
 	public static final String GLOBAL_REQUEST_ID_KEY="GLOBAL_REQUEST_ID";
+	@Autowired
+	private Environment env;
 	
 	@Override
 	public String filterType() {
@@ -42,6 +47,7 @@ public class GlobalRequestIdSetFilter extends ZuulFilter {
 		MDC.put(GLOBAL_REQUEST_ID_KEY, "["+globalRequestId+"] ");
 		ctx.addZuulRequestHeader(GLOBAL_REQUEST_ID_KEY, globalRequestId);
 		logger.info("request for uri("+request.getRequestURI()+")");
+		logger.info("apiSecret="+env.getProperty("apiSecret"));
 		return null;
 	}
 }
