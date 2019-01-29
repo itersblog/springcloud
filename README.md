@@ -5,3 +5,4 @@
 4、[Spring Cloud入门教程（四）：Feign声明式web服务客户端](http://www.itersblog.com/archives/12.html)  
 5、[Spring Cloud入门教程（五）：Ribbon负载均衡器](http://www.itersblog.com/archives/13.html)  
 6、[Spring Cloud入门教程（六）：Hystrix熔断器](http://www.itersblog.com/archives/21.html)  
+7、[Spring Cloud入门教程（七）：Zuul网关](http://www.itersblog.com/archives/23.html)  
